@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
@@ -25,11 +26,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
@@ -94,16 +98,21 @@ fun LoginButtons(modifier: Modifier) {
             onClick = { /*TODO*/ },
             shape = MaterialTheme.shapes.large
         ) {
-            Text("Hit Me")
+            Text("GET STARTED")
         }
         Spacer(Modifier.width(8.dp))
-        Button(
+        OutlinedButton(
             modifier = Modifier.fillMaxSize().weight(1f),
 
             onClick = { /*TODO*/ },
-            shape = MaterialTheme.shapes.large
+            colors = ButtonDefaults.outlinedButtonColors(
+                backgroundColor = Color.Transparent
+            ),
+            shape = MaterialTheme.shapes.large,
+            border = BorderStroke(ButtonDefaults.OutlinedBorderSize, MaterialTheme.colors.primary)
+
         ) {
-            Text("Hit Me")
+            Text("LOG IN")
         }
     }
 }
@@ -128,18 +137,5 @@ fun decoupledConstraints(botMarg: Dp): ConstraintSet {
     }
 }
 
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun WelcomePreview() {
-    MyTheme {
-        Welcome()
-    }
-}
 
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        Welcome()
-    }
-}
+
