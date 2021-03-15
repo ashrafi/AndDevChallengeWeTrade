@@ -22,26 +22,61 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.ui.screens.Home
 import com.example.androiddevchallenge.ui.screens.Login
 import com.example.androiddevchallenge.ui.screens.Welcome
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                Surface(color = MaterialTheme.colors.background) {
+                    WeTradeApp()
+                }
             }
         }
     }
 }
 
+@Composable
+fun WeTradeApp() {
+    val navController = rememberNavController()
+    NavHost(navController, startDestination = "welcome") {
+        composable("welcome") {
+            Welcome(navController)
+        }
+        // navigateToHome = { navController.navigate("home") }
+        composable("login") {
+            Login(navController)
+        }
+        composable("home") { Home() }
+    }
+}
+
+/*
+    val navController = rememberNavController()
+    NavHost(navController, startDestination = "welcome") {
+        composable("welcome") {
+            WelcomeScreen(navigateToLogin = { navController.navigate("login") })
+        }
+        composable("login") {
+            LoginScreen(navigateToHome = { navController.navigate("home") })
+        }
+        composable("home") { HomeScreen() }
+    }
+ */
+
 // Start building your app here!
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        Login()
+        MyApp()
     }
 }
 

@@ -20,27 +20,41 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-
-private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
-    secondary = teal200
-)
+import androidx.compose.ui.unit.dp
 
 private val LightColorPalette = lightColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200
+    primary = yellow,
+    onPrimary = gray900,
+    background = purple,
+    surface = white,
+    onBackground = white,
+    onSurface = gray900,
 
-        /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    /* Other default colors to override
+background = Color.White,
+surface = Color.White,
+onPrimary = Color.White,
+onSecondary = Color.Black,
+onBackground = Color.Black,
+onSurface = Color.Black,
+*/
+
 )
+
+val custom1 = green
+val custom2 = red
+
+private val DarkColorPalette = darkColors(
+    primary = yellow,
+    onPrimary = gray900,
+    background = gray900,
+    surface = gray700,
+    onBackground = white,
+    onSurface = white
+)
+val buttonElevation = 0.dp
+
+// Icons
 
 @Composable
 fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {

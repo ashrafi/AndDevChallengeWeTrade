@@ -33,7 +33,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
@@ -42,21 +41,23 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.MyTheme
-import com.example.androiddevchallenge.ui.theme.shapes
 
+// navigateToLogin = { navController.navigate("login") }
 @Composable
-fun Welcome() {
-    // add background image
-
+fun Welcome(
+    navController: NavHostController
+) {
     val constraints = decoupledConstraints(32.dp)
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         BackGroundImage()
         ConstraintLayout(constraints, modifier = Modifier.fillMaxSize()) {
-
             Logo(modifier = Modifier.layoutId("logo"))
-            LoginButtons(modifier = Modifier.layoutId("login"))
+            LoginButtons(modifier = Modifier.layoutId("login"), navController)
         }
     }
 }
@@ -82,7 +83,7 @@ fun Logo(modifier: Modifier) {
 }
 
 @Composable
-fun LoginButtons(modifier: Modifier) {
+fun LoginButtons(modifier: Modifier, navController: NavHostController) {
     Row(
         modifier = modifier
             .padding(
@@ -104,15 +105,15 @@ fun LoginButtons(modifier: Modifier) {
         OutlinedButton(
             modifier = Modifier.fillMaxSize().weight(1f),
 
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("login") },
             colors = ButtonDefaults.outlinedButtonColors(
-                backgroundColor = Color.Transparent
+                backgroundColor = MaterialTheme.colors.background
             ),
             shape = MaterialTheme.shapes.large,
             border = BorderStroke(ButtonDefaults.OutlinedBorderSize, MaterialTheme.colors.primary)
 
         ) {
-            Text("LOG IN")
+            Text("LOG IN",)
         }
     }
 }
@@ -137,5 +138,20 @@ fun decoupledConstraints(botMarg: Dp): ConstraintSet {
     }
 }
 
+@Preview("Light Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun WelcomePreview() {
+    val navController = rememberNavController()
+    MyTheme {
+        Welcome(navController)
+    }
+}
 
-
+@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun DarkPreview() {
+    val navController = rememberNavController()
+    MyTheme(darkTheme = true) {
+        Welcome(navController)
+    }
+}
